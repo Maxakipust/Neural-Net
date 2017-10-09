@@ -153,4 +153,25 @@ public class Network {
         }
         return ans /list.size();
     }
+
+    @Override
+    public String toString() {
+        String ans = "";
+        ans += "Learn Rate: " + LearnRate;
+        ans += "Momentum: " + Momentum;
+        ans += "Input Layer: ";
+        for(int i =0; i<InputLayer.size();i++){
+            ans += "\t"+InputLayer.get(i).toString();
+        }
+        ans += "Hidden Layers: "
+        for(int i =0; i<HiddenLayers.size();i++){
+            ans += "Hidden Layer "+i+": ";
+            for(int j = 0; j<HiddenLayers.get(i).size();j++) {
+                ans += "\t\t" + HiddenLayers.get(i).get(j).toString();
+            }
+        }
+        ans += ""
+
+        return ans;
+    }
 }
