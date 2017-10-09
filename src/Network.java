@@ -163,14 +163,14 @@ public class Network {
         for(int i =0; i<InputLayer.size();i++){
             ans += "\t"+InputLayer.get(i).toString();
         }
-        ans += "Hidden Layers: "
+        ans += "Hidden Layers: ";
         for(int i =0; i<HiddenLayers.size();i++){
             ans += "Hidden Layer "+i+": ";
             for(int j = 0; j<HiddenLayers.get(i).size();j++) {
                 ans += "\t\t" + HiddenLayers.get(i).get(j).toString();
             }
         }
-        ans += ""
+        ans += "";
 
         return ans;
     }
