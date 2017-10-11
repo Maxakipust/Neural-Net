@@ -1,7 +1,6 @@
-import sun.awt.image.ImageWatched;
+
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 public class Network {
@@ -157,21 +156,52 @@ public class Network {
     @Override
     public String toString() {
         String ans = "";
-        ans += "Learn Rate: " + LearnRate;
-        ans += "Momentum: " + Momentum;
-        ans += "Input Layer: ";
+        ans += "Learn Rate: " + LearnRate+"\n";
+        ans += "Momentum: " + Momentum+"\n";
+        ans += "Input Layer: "+"\n";
         for(int i =0; i<InputLayer.size();i++){
-            ans += "\t"+InputLayer.get(i).toString();
-        }
-        ans += "Hidden Layers: ";
-        for(int i =0; i<HiddenLayers.size();i++){
-            ans += "Hidden Layer "+i+": ";
-            for(int j = 0; j<HiddenLayers.get(i).size();j++) {
-                ans += "\t\t" + HiddenLayers.get(i).get(j).toString();
+            String[] t = InputLayer.get(i).toString().split("\n");
+            for(String s:t) {
+                ans += "\t"+s+"\n";
             }
         }
-        ans += "";
+        ans += "Hidden Layers: \n";
+        for(int i =0; i<HiddenLayers.size();i++){
+            ans += "Hidden Layer "+i+": \n";
+            for(int j = 0; j<HiddenLayers.get(i).size();j++) {
+                String[] t = HiddenLayers.get(i).get(j).toString().split("\n");
+                for(String s:t) {
+                    ans += "\t\t"+s+"\n";
+                }
+            }
+        }
+        ans += "Output Layers: ";
+        for(int i =0;i<OutputLayer.size();i++){
+            String[] t = OutputLayer.get(i).toString().split("\n");
+            for(String s:t) {
+                ans += "\t"+s+"\n";
+            }
+        }
 
+        ans += "Synapses: \n";
+        LinkedList<Synapse> synapses = new LinkedList<Synapse>();
+        for(Neuron a:InputLayer){
+            synapses.addAll(a.InputSynapses);
+            synapses.addAll(a.OutputSynapses);
+        }
+        for(LinkedList<Neuron> a:HiddenLayers){
+            for(Neuron b:a) {
+                synapses.addAll(b.InputSynapses);
+                synapses.addAll(b.OutputSynapses);
+            }
+        }
+        for(Neuron a:OutputLayer){
+            synapses.addAll(a.InputSynapses);
+            synapses.addAll(a.OutputSynapses);
+        }
+        for(Synapse s:synapses){
+
+        }
         return ans;
     }
 }

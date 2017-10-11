@@ -4,12 +4,13 @@ import java.util.*;
 
 public class Neuron {
     public UUID Id;
-    public LinkedList<Synapse> InputSynapses;
-    public LinkedList<Synapse> OutputSynapses;
     public double Bias;
     public double BiasDelta;
     public double Gradient;
     public double Value;
+    public LinkedList<Synapse> InputSynapses;
+    public LinkedList<Synapse> OutputSynapses;
+
 
     public Neuron(){
         Id = UUID.randomUUID();
@@ -62,5 +63,14 @@ public class Neuron {
             s.WeightDelta = learnRate*Gradient*s.InputNeuron.Value;
             s.Weight += s.WeightDelta+momentum*prevDelta;
         }
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Neuron){
+            return ((Neuron)obj).Id == this.Id;
+        }
+        return false;
     }
 }
