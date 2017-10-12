@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Synapse {
+public class Synapse implements Serializable {
     public UUID Id;
     public Neuron InputNeuron;
     public Neuron OutputNeuron;

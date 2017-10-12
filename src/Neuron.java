@@ -1,8 +1,9 @@
 import sun.awt.im.InputMethodJFrame;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Neuron {
+public class Neuron implements Serializable {
     public UUID Id;
     public double Bias;
     public double BiasDelta;
@@ -20,6 +21,8 @@ public class Neuron {
     }
 
     public Neuron(LinkedList<Neuron> inputNeurons){
+        InputSynapses = new LinkedList<Synapse>();
+        OutputSynapses = new LinkedList<Synapse>();
         for(Neuron n : inputNeurons){
             Synapse s = new Synapse(n,this);
             n.OutputSynapses.add(s);
@@ -28,13 +31,14 @@ public class Neuron {
     }
 
     public double CalculateValue(){
-        int ret = 0;
+        double ret = 0;
         for(Synapse a: InputSynapses){
-            ret+=a.Weight*a.InputNeuron.Value;
+            ret=ret+a.Weight*a.InputNeuron.Value;
         }
         ret += Bias;
+        ret = Sigmoid.Output(ret);
         Value = ret;
-        return Sigmoid.Output(ret);
+        return ret;
     }
 
     public double CalculateError(double target){

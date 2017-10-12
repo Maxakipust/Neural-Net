@@ -1,9 +1,10 @@
 
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class Network {
+public class Network implements Serializable{
     public double LearnRate;
     public double Momentum;
     public LinkedList<Neuron> InputLayer;
@@ -64,7 +65,7 @@ public class Network {
 
     public void Train(LinkedList<DataSet> dataSets, double minimumError){
         double error = 1.0;
-        double numEpochs = 0;
+        int numEpochs = 0;
 
         while(error>minimumError && numEpochs<Integer.MAX_VALUE){
             LinkedList<Double> errors = new LinkedList<Double>();
@@ -139,8 +140,8 @@ public class Network {
 
     public LinkedList<LinkedList<Neuron>> Reverse(LinkedList<LinkedList<Neuron>> list){
         LinkedList<LinkedList<Neuron>> ans = new LinkedList<LinkedList<Neuron>>();
-        for(int i = list.size(); i>0;i--){
-            ans.add(list.get(i));
+        for(int i = 1; i<=list.size();i++){
+            ans.add(list.get(list.size()-i));
         }
         return ans;
     }
