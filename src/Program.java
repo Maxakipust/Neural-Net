@@ -1,9 +1,7 @@
-import java.io.Console;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
-public class Program {
+class Program {
     private static Scanner scanner;
     private static int numInputParams;
     private static int numHiddenLayers;
@@ -19,13 +17,13 @@ public class Program {
         InitialMenu();
     }
 
-    public static void Greet(){
+    private static void Greet(){
         println("Max's First Neural Network");
         printSeperater();
         println("");
     }
 
-    public static void InitialMenu(){
+    private static void InitialMenu(){
         println("Main Menu");
         printSeperater();
         println("\t1. Create New Network");
@@ -45,7 +43,7 @@ public class Program {
         }
     }
 
-    public static void DatasetMenu(){
+    private static void DatasetMenu(){
         println("Dataset Menu");
         printSeperater();
         println("\t1. Type Dataset");
@@ -76,7 +74,7 @@ public class Program {
         }
     }
 
-    public static void NetworkMenu(){
+    private static void NetworkMenu(){
         println("Network Menu");
         printSeperater();
         println("\t1. Train Network");
@@ -110,7 +108,7 @@ public class Program {
         }
     }
 
-    public static boolean SetupNatwork(){
+    private static boolean SetupNatwork(){
         println("");
         System.out.println("Network Setup");
         printSeperater();
@@ -131,7 +129,7 @@ public class Program {
         return true;
     }
 
-    public static void SetNumInputParameters(){
+    private static void SetNumInputParameters(){
         println("\tHow Many input parameters will there be? (at least 2)");
         System.out.print(">");
         numInputParams = Integer.parseInt(scanner.nextLine());
@@ -142,7 +140,7 @@ public class Program {
         println("");
     }
 
-    public static void SetNumNeuronsInHidden(){
+    private static void SetNumNeuronsInHidden(){
         println("\tHow many hidden layers? (at least 1)");
         System.out.print(">");
         numHiddenLayers = Integer.parseInt(scanner.nextLine().trim());
@@ -158,7 +156,7 @@ public class Program {
         println("");
     }
 
-    public static void SetNumOutputParameters(){
+    private static void SetNumOutputParameters(){
         println("\tHow Many output parameters will there be? (at least 2)");
         System.out.print(">");
         numOutputParams = Integer.parseInt(scanner.nextLine());
@@ -176,7 +174,7 @@ public class Program {
         println("\tHow many datasets are you going to enter?");
         System.out.print(">");
         int numDatasets = Integer.parseInt(scanner.nextLine());
-        LinkedList<DataSet> newDatasets = new LinkedList<DataSet>();
+        LinkedList<DataSet> newDatasets = new LinkedList<>();
         for(int i = 0; i<numDatasets;i++){
             double[] values = GetInputData("\tData Set "+i+"'s Values: ");
             if(values==null){
@@ -345,7 +343,7 @@ public class Program {
         if (network == null)
         {
             println("\t****Something went wrong while importing your network.****");
-            return;
+            Exit();
         }
 
         numInputParams = network.InputLayer.size();
@@ -418,11 +416,11 @@ public class Program {
     }
 
 
-    public static void println(String dat){
+    private static void println(String dat){
         System.out.println(dat);
     }
 
-    public static void printSeperater(){
+    private static void printSeperater(){
         String ans = "";
         for(int i =0; i<50;i++){
             ans+="-";
