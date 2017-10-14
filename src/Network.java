@@ -3,8 +3,8 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Network implements Serializable{
-    private double LearnRate;
-    private double Momentum;
+    public double LearnRate;
+    public double Momentum;
     public LinkedList<Neuron> InputLayer;
     public LinkedList<LinkedList<Neuron>> HiddenLayers;
     public LinkedList<Neuron> OutputLayer;
@@ -33,7 +33,7 @@ public class Network implements Serializable{
             InputLayer.add(new Neuron());
         }
         LinkedList<Neuron> firstHiddenLayor = new LinkedList<>();
-        for (int hiddenSize : hiddenSizes) {
+        for (int i = 0; i<hiddenSizes[0];i++) {
             firstHiddenLayor.add(new Neuron(InputLayer));
         }
 
@@ -75,6 +75,7 @@ public class Network implements Serializable{
             error = Average(errors);
             numEpochs+=1;
         }
+        System.out.println("Epochs: "+numEpochs);
     }
 
     private void ForwardPropagate(double[] inputs){
@@ -134,5 +135,51 @@ public class Network implements Serializable{
             ans+=a;
         }
         return ans /list.size();
+    }
+
+    @Override
+    public String toString() {
+        String ans = "";
+        ans+= "Learn Rate: "+ LearnRate+"\n";
+        ans+= "Momentum: "+Momentum+"\n";
+        ans+= "Input Layer: \n";
+        for(int i = 0; i<InputLayer.size();i++){
+            ans+= "Neuron "+i+"\n";
+            ans+= InputLayer.get(i).toString();
+        }
+        ans+="Hidden Layers\n";
+        for(int i = 0; i<HiddenLayers.size();i++){
+            ans+= "Hidden Layer "+i+"\n";
+            for(int x = 0;x<HiddenLayers.get(i).size();x++) {
+                ans += "Neuron " + x+"\n";
+                ans += HiddenLayers.get(i).get(x).toString();
+            }
+        }
+        ans+="Output Layer\n";
+        for(int i = 0; i<OutputLayer.size();i++){
+            ans+= "Neuron "+i+"\n";
+            ans+= OutputLayer.get(i).toString();
+        }
+        ans+= "Synapses: \n";
+        LinkedList<Synapse> synapses = new LinkedList<>();
+        for(Neuron n:InputLayer){
+            synapses.addAll(n.InputSynapses);
+            synapses.addAll(n.OutputSynapses);
+        }
+        for(LinkedList<Neuron> ll:HiddenLayers) {
+            for (Neuron n : ll) {
+                synapses.addAll(n.InputSynapses);
+                synapses.addAll(n.OutputSynapses);
+            }
+        }
+        for(Neuron n:OutputLayer){
+            synapses.addAll(n.InputSynapses);
+            synapses.addAll(n.OutputSynapses);
+        }
+        for(Synapse s:synapses){
+            ans+="Synapse\n";
+            ans+=s.toString();
+        }
+        return ans;
     }
 }

@@ -14,4 +14,15 @@ class Synapse implements Serializable {
         this.OutputNeuron = outputNeuron;
         this.Weight = Network.GetRandom();
     }
+
+    @Override
+    public String toString() {
+        String ans = "";
+        ans+= "\tId: "+ Id.toString()+"\n";
+        ans+= "\tOutput Neuron Id: "+ OutputNeuron.Id.toString()+"\n";
+        ans+= "\tInput Neuron Id: "+ InputNeuron.Id.toString()+"\n";
+        ans+= "\tWeight: "+Weight+"\n";
+        ans+= "\tWeight Delta: "+WeightDelta+"\n";
+        return ans;
+    }
 }

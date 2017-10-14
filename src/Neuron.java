@@ -2,13 +2,13 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Neuron implements Serializable {
-    private UUID Id;
+    public UUID Id;
     private double Bias;
     private double BiasDelta;
     private double Gradient;
     public double Value;
-    private final LinkedList<Synapse> InputSynapses;
-    private final LinkedList<Synapse> OutputSynapses;
+    public final LinkedList<Synapse> InputSynapses;
+    public final LinkedList<Synapse> OutputSynapses;
 
 
     public Neuron(){
@@ -19,6 +19,7 @@ public class Neuron implements Serializable {
     }
 
     public Neuron(LinkedList<Neuron> inputNeurons){
+        Id = UUID.randomUUID();
         InputSynapses = new LinkedList<>();
         OutputSynapses = new LinkedList<>();
         for(Neuron n : inputNeurons){
@@ -65,6 +66,16 @@ public class Neuron implements Serializable {
         }
     }
 
+    @Override
+    public String toString() {
+        String ans = "";
+        ans+= "\tId: "+Id.toString()+"\n";
+        ans+= "\tBias: "+Bias+"\n";
+        ans+= "\tBias Delta: "+BiasDelta+"\n";
+        ans+= "\tGradient: "+Gradient+"\n";
+        ans+= "\tValue: "+Value+"\n";
+        return ans;
+    }
 
     @Override
     public boolean equals(Object obj) {

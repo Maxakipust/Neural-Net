@@ -157,7 +157,7 @@ class Program {
     }
 
     private static void SetNumOutputParameters(){
-        println("\tHow Many output parameters will there be? (at least 2)");
+        println("\tHow Many output parameters will there be? (at least 1)");
         System.out.print(">");
         numOutputParams = Integer.parseInt(scanner.nextLine());
         if(numOutputParams<2){
@@ -211,6 +211,8 @@ class Program {
             println(message);
             System.out.print(">");
             line = scanner.nextLine();
+            if (line.equals("menu"))
+                return null;
         }
 
         double[] values = new double[numInputParams];
@@ -352,6 +354,8 @@ class Program {
 
         println("\t**Network successfully imported.**");
         println("");
+
+        DumpNet();
     }
 
     private static void ExportNetwork()
@@ -413,6 +417,12 @@ class Program {
         println("Press ENTER to continue");
         scanner.nextLine();
         System.exit(0);
+    }
+
+    private static void DumpNet(){
+        println("Printing Network");
+        printSeperater();
+        println(network.toString());
     }
 
 
